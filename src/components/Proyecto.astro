@@ -1,0 +1,125 @@
+---
+interface Props {
+  nombre: string;
+  tipo: string;
+  resumen: string;
+  stack: string[];
+  datos?: string[];
+  estado?: 'live' | 'dev' | 'ninguno';
+  estadoTexto?: string;
+  invertido?: boolean;
+  enlace?: { href: string; texto: string };
+  nota?: string;
+}
+
+const {
+  nombre,
+  tipo,
+  resumen,
+  stack,
+  datos = [],
+  estado = 'live',
+  estadoTexto = 'En producción',
+  invertido = false,
+  enlace,
+  nota,
+} = Astro.props;
+---
+
+<article class={`proyecto ${invertido ? 'inv' : ''}`}>
+  <div class="texto reveal">
+    <h3 class="h-proj">{nombre}</h3>
+    <p class="tipo">{tipo}</p>
+    <p class="lead">{resumen}</p>
+    {nota && <p class="nota-proj">{nota}</p>}
+
+    <div class="chips">
+      {stack.map((s) => <span class="chip">{s}</span>)}
+    </div>
+
+    {datos.length > 0 && (
+      <ul class="datos">
+        {datos.map((d) => <li>{d}</li>)}
+      </ul>
+    )}
+
+    <div class="pie-proj">
+      {estado !== 'ninguno' && <span class={`estado ${estado === 'dev' ? 'e-dev' : 'e-live'}`}>{estadoTexto}</span>}
+      {enlace && (
+        <a class="enlace vivo" href={enlace.href} target="_blank" rel="noopener">
+          {enlace.texto}
+        </a>
+      )}
+    </div>
+  </div>
+
+  <div class="visual reveal d1">
+    <slot />
+  </div>
+</article>
+
+<style>
+  .proyecto {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+    padding-block: clamp(40px, 6vw, 76px);
+    border-top: 1px solid var(--rule-soft);
+  }
+  .proyecto.inv { grid-template-columns: minmax(0, 1fr) minmax(0, 340px); }
+  .proyecto.inv .texto { order: 2; }
+  .proyecto.inv .visual { order: 1; }
+
+  .texto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    position: sticky;
+    top: 40px;
+  }
+  .tipo { margin: -6px 0 0; font-size: 15px; color: var(--ink-faint); }
+  .nota-proj {
+    margin: 0;
+    padding-left: 12px;
+    border-left: 2px solid var(--accent);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .pie-proj { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+
+  .datos {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  .datos li { display: flex; gap: 9px; align-items: baseline; }
+  .datos li::before {
+    content: "";
+    width: 10px; height: 1px;
+    background: var(--accent);
+    flex: none;
+    transform: translateY(-3px);
+  }
+
+  .visual {
+    display: grid;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  @media (max-width: 900px) {
+    .proyecto,
+    .proyecto.inv { grid-template-columns: 1fr; }
+    .proyecto.inv .texto { order: 0; }
+    .proyecto.inv .visual { order: 1; }
+    .texto { position: static; }
+  }
+</style>

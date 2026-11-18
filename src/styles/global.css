@@ -1,0 +1,243 @@
+/* ============================================================
+   Portafolio — Leonardo Madrigal Pardo
+   Tema oscuro único: las capturas de las apps son oscuras y así
+   la pantalla no pelea con ellas.
+   ============================================================ */
+
+:root {
+  /* Tema oscuro azul marino ("pantalla de sistema de noche"), no casi negro:
+     acento azul claro de sus sistemas y verde de "en producción". */
+  --ground:     #0F1A2A;
+  --ground-2:   #132134;
+  --surface:    #172740;
+  --surface-2:  #1D3050;
+  --rule:       #2A3E5C;
+  --rule-soft:  #20324D;
+
+  --ink:        #E6EDF7;
+  --ink-soft:   #AEBCD0;
+  --ink-faint:  #93A5BD;
+
+  --accent:     #6EA8FF;
+  --accent-dim: #1F3A66;
+  --live:       #5FD3A2;
+  --live-dim:   #133A33;
+  --dev:        #E8C468;
+  --dev-dim:    #3A2F12;
+
+  --display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --mono: var(--display); /* sin letra de máquina: no hay código en la página */
+
+  --max: 1240px;
+  --gutter: clamp(20px, 4vw, 48px);
+}
+
+* { box-sizing: border-box; }
+
+p, li, dd { text-wrap: pretty; }
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background: var(--ground);
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--display);
+  font-variation-settings: "wdth" 100;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--accent); text-underline-offset: 3px; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Tipografía ---------- */
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--ink-faint);
+  margin: 0;
+}
+
+.h-xxl {
+  font-variation-settings: "wdth" 112, "wght" 800;
+  font-size: clamp(40px, 6.6vw, 84px);
+  line-height: 0.9;
+  letter-spacing: -0.028em;
+  margin: 0;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: none;
+}
+
+.h-sec {
+  font-variation-settings: "wdth" 112, "wght" 750;
+  font-size: clamp(26px, 4.2vw, 44px);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.h-proj {
+  font-variation-settings: "wdth" 110, "wght" 750;
+  font-size: clamp(24px, 3.4vw, 38px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.lead {
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 46ch;
+}
+
+.tiny {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--ink-faint);
+}
+
+/* ---------- Chips y etiquetas ---------- */
+
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.chip {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 5px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+.estado {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.estado::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.e-live { color: var(--live); background: var(--live-dim); }
+.e-dev  { color: var(--dev);  background: var(--dev-dim); }
+
+/* ---------- Enlaces de contacto ---------- */
+
+.enlace {
+  font-family: var(--mono);
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color .2s, transform .2s, background .2s;
+}
+.enlace:hover {
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+.enlace svg { width: 15px; height: 15px; flex: none; opacity: .75; }
+
+/* Botón "Ver en vivo": relleno en el color de acento para que no se pierda en el fondo. */
+.enlace.vivo {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0F1A2A;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .35);
+}
+.enlace.vivo svg { opacity: 1; }
+.enlace.vivo:hover {
+  background: #9CC4FF;
+  border-color: #9CC4FF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+}
+
+/* ---------- Secciones ---------- */
+
+.seccion { padding-block: clamp(64px, 9vw, 128px); }
+
+.sec-cab {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+.sec-cab p { margin: 0; color: var(--ink-faint); font-size: 14.5px; max-width: 40ch; }
+
+/* ---------- Animación de entrada ----------
+   Una sola secuencia, al abrir la página y solo en la portada: nombre, frase,
+   contactos y después las tres capturas acomodándose una tras otra.
+   El resto de la página no se anima al hacer scroll. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .js .hero .hero-pila .reveal {
+    transform: translateY(28px) rotate(-2deg) scale(.96);
+  }
+  .js .hero .reveal.dentro {
+    opacity: 1;
+    transform: none;
+    transition: opacity .7s cubic-bezier(.2,.7,.25,1), transform .9s cubic-bezier(.2,.7,.25,1);
+  }
+  .js .hero .reveal.d1.dentro { transition-delay: .12s; }
+  .js .hero .reveal.d2.dentro { transition-delay: .24s; }
+  .js .hero .reveal.d3.dentro { transition-delay: .36s; }
+  .js .hero .hero-pila .p1.dentro { transition-delay: .45s; }
+  .js .hero .hero-pila .p2.dentro { transition-delay: .65s; }
+  .js .hero .hero-pila .p3.dentro { transition-delay: .85s; }
+}
+
+/* ---------- Pie ---------- */
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding-block: 40px 56px;
+  margin-top: 40px;
+}

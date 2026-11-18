@@ -1,0 +1,199 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+}
+
+const { titulo, descripcion } = Astro.props;
+const url = 'https://leostudiocode.github.io/';
+const favicon =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E" +
+  "%3Crect width='32' height='32' rx='6' fill='%230A0E13'/%3E" +
+  "%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-size='15' font-weight='700' " +
+  "fill='%23F0873C' text-anchor='middle'%3ELM%3C/text%3E%3C/svg%3E";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <meta name="author" content="Leonardo Madrigal Pardo" />
+    <link rel="canonical" href={url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:locale" content="es_MX" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0F1A2A" />
+    <link rel="icon" href={favicon} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    />
+    <script is:inline>
+      // Marca que hay JS ANTES de pintar, para que las animaciones de entrada
+      // solo existan cuando de verdad se pueden ejecutar. Sin JS, todo se ve.
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- Visor de capturas -->
+    <div id="visor" class="visor" hidden>
+      <button class="visor-cerrar" type="button" aria-label="Cerrar">&times;</button>
+      <button class="visor-nav visor-prev" type="button" aria-label="Anterior">&#8249;</button>
+      <button class="visor-nav visor-sig" type="button" aria-label="Siguiente">&#8250;</button>
+      <figure>
+        <img id="visor-img" src="" alt="" />
+        <figcaption id="visor-pie"></figcaption>
+      </figure>
+    </div>
+
+    <style is:global>
+      .visor {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: rgba(8, 14, 24, 0.95);
+        display: grid;
+        place-items: center;
+        padding: clamp(16px, 4vw, 56px);
+      }
+      .visor[hidden], .visor-nav[hidden] { display: none !important; }
+      .visor figure { margin: 0; max-width: 100%; max-height: 100%; }
+      .visor img {
+        max-width: 100%;
+        max-height: 86vh;
+        object-fit: contain;
+        border-radius: 8px;
+        border: 1px solid var(--rule);
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+      }
+      .visor figcaption {
+        font-family: var(--mono);
+        font-size: 15px;
+        color: #E6EDF7;
+        text-align: center;
+        padding-top: 14px;
+      }
+      .visor-cerrar,
+      .visor-nav {
+        position: absolute;
+        background: var(--surface);
+        border: 1px solid var(--rule);
+        color: var(--ink);
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 22px;
+        line-height: 1;
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+      }
+      .visor-cerrar { top: 18px; right: 18px; }
+      .visor-nav { top: 50%; transform: translateY(-50%); }
+      .visor-prev { left: 14px; }
+      .visor-sig { right: 14px; }
+      .visor-cerrar:hover,
+      .visor-nav:hover { border-color: var(--accent); color: var(--accent); }
+      @media (max-width: 700px) {
+        .visor-nav { top: auto; bottom: 18px; transform: none; }
+      }
+    </style>
+
+    <script is:inline>
+      (function () {
+        // ---- Aparición al hacer scroll -------------------------------------
+        var elementos = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          var obs = new IntersectionObserver(
+            function (entradas) {
+              entradas.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add('dentro');
+                  obs.unobserve(e.target);
+                }
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 }
+          );
+          elementos.forEach(function (el) { obs.observe(el); });
+        } else {
+          elementos.forEach(function (el) { el.classList.add('dentro'); });
+        }
+
+        // ---- Visor de capturas ---------------------------------------------
+        var visor = document.getElementById('visor');
+        var img = document.getElementById('visor-img');
+        var pie = document.getElementById('visor-pie');
+        var disparadores = Array.prototype.slice.call(document.querySelectorAll('[data-visor]'));
+        // Las flechas solo recorren las fotos del MISMO proyecto (o de la portada).
+        var grupo = [];
+        var actual = 0;
+        var flechas = visor.querySelectorAll('.visor-nav');
+
+        function fuente(el) {
+          var i = el.querySelector('img');
+          return { src: el.getAttribute('data-grande') || i.currentSrc || i.src, alt: i.alt, pie: el.getAttribute('data-pie') || i.alt };
+        }
+
+        function grupoDe(el) {
+          var caja = el.closest('article, .hero-pila') || document;
+          return Array.prototype.slice.call(caja.querySelectorAll('[data-visor]'));
+        }
+
+        function mostrar(i) {
+          actual = (i + grupo.length) % grupo.length;
+          var d = fuente(grupo[actual]);
+          img.src = d.src;
+          img.alt = d.alt;
+          pie.textContent = d.pie;
+        }
+
+        function abrir(el) {
+          grupo = grupoDe(el);
+          var una = grupo.length < 2;
+          flechas.forEach(function (f) { f.hidden = una; });
+          mostrar(grupo.indexOf(el));
+          visor.hidden = false;
+          document.body.style.overflow = 'hidden';
+        }
+
+        function cerrar() {
+          visor.hidden = true;
+          img.src = '';
+          document.body.style.overflow = '';
+        }
+
+        disparadores.forEach(function (el) {
+          el.addEventListener('click', function () { abrir(el); });
+          el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(el); }
+          });
+        });
+
+        visor.querySelector('.visor-cerrar').addEventListener('click', cerrar);
+        visor.querySelector('.visor-prev').addEventListener('click', function () { mostrar(actual - 1); });
+        visor.querySelector('.visor-sig').addEventListener('click', function () { mostrar(actual + 1); });
+        visor.addEventListener('click', function (e) { if (e.target === visor) cerrar(); });
+        document.addEventListener('keydown', function (e) {
+          if (visor.hidden) return;
+          if (e.key === 'Escape') cerrar();
+          if (e.key === 'ArrowLeft' && grupo.length > 1) mostrar(actual - 1);
+          if (e.key === 'ArrowRight' && grupo.length > 1) mostrar(actual + 1);
+        });
+      })();
+    </script>
+  </body>
+</html>

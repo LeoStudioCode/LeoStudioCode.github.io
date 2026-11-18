@@ -1,0 +1,645 @@
+---
+import Base from '../layouts/Base.astro';
+import Captura from '../components/Captura.astro';
+import Proyecto from '../components/Proyecto.astro';
+
+import monitorCuadre from '../assets/img/monitor-cuadre.png';
+import monitorGuardias from '../assets/img/monitor-guardias.png';
+import monitorLogin from '../assets/img/monitor-login-gs.png';
+import monitorUsuarios from '../assets/img/monitor-usuarios.png';
+import reportesCentros from '../assets/img/reportes-centros.png';
+import reportesRetiros from '../assets/img/reportes-retiros.png';
+import reportesEfectivo from '../assets/img/reportes-efectivo-tabla.png';
+import reportesFacturas from '../assets/img/reportes-facturas.png';
+import helpcar from '../assets/img/helpcar-principal.png';
+import posTicket from '../assets/img/pos-ticket.png';
+import posReporte from '../assets/img/pos-reporte.png';
+import posCatalogo from '../assets/img/pos-catalogo.png';
+import quizzTema from '../assets/img/quizz-tema.png';
+import quizzIa from '../assets/img/quizz-ia.png';
+import bitacorasRevision from '../assets/img/bitacoras-revision.png';
+import vazoilHero from '../assets/img/vazoil-hero.png';
+import kikeHero from '../assets/img/kike-hero.png';
+import essencePanel from '../assets/img/essence-panel.png';
+import essencePanelServicios from '../assets/img/essence-panel-servicios.png';
+
+const descripcion =
+  'Leonardo Madrigal Pardo — desarrollador full-stack en Villahermosa. Aplicaciones web, de escritorio y móviles, y servidores con Windows Server y Linux.';
+---
+
+<Base titulo="Portafolio de Leonardo Madrigal" descripcion={descripcion}>
+  <!-- ══════════════════════ PORTADA ══════════════════════ -->
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-texto">
+        <p class="eyebrow reveal">Villahermosa, Tabasco, México</p>
+        <h1 class="h-xxl reveal d1">Leonardo<br />Madrigal</h1>
+        <p class="lead reveal d2">
+          Desarrollador full-stack. Construyo aplicaciones web, de escritorio y móviles, y sé
+          montar y administrar servidores con Windows Server y Linux.
+        </p>
+        <p class="busco reveal d2">Busco sumarme a un equipo de desarrollo.</p>
+        <div class="enlaces reveal d3">
+          <a class="enlace" href="mailto:leonidaismadrigalpardo@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
+            leonidaismadrigalpardo@gmail.com
+          </a>
+          <a class="enlace" href="mailto:leomadrigalpardo@outlook.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
+            leomadrigalpardo@outlook.com
+          </a>
+          <a class="enlace" href="https://github.com/LeoStudioCode" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.51 2.87 8.34 6.84 9.69.5.1.68-.22.68-.49l-.01-1.71c-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"></path></svg>
+            github.com/LeoStudioCode
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-pila" aria-hidden="false">
+        <div class="pila-item p1 reveal d1">
+          <Captura prueba src={monitorCuadre} alt="Tablero de cuadre diario del Monitor de Ventas" etiqueta="Monitor de Ventas, Cuadre CAR" pie="Monitor de Ventas: tablero de cuadre diario" ancho={1400} prioridad={true} />
+        </div>
+        <div class="pila-item p2 reveal d2">
+          <Captura src={kikeHero} alt="Portada del sitio de Essence Beauty" etiqueta="Essence Beauty" pie="Essence Beauty: landing en Astro" ancho={900} />
+        </div>
+        <div class="pila-item p3 reveal d3">
+          <Captura src={quizzTema} alt="Pantalla de un tema en QuizzApp" etiqueta="QuizzApp" pie="QuizzApp: un tema con sus modos de estudio" ancho={900} />
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- ══════════════════════ PRODUCCIÓN ══════════════════════ -->
+  <section class="seccion" id="trabajo">
+    <div class="wrap">
+      <div class="sec-cab">
+        <h2 class="h-sec">Software que se usa todos los días</h2>
+        <p>Hecho en Grupo Sánchez, donde trabajo. Las capturas usan datos de prueba, no información real de la empresa.</p>
+      </div>
+
+      <Proyecto
+        nombre="Monitor de Ventas"
+        tipo="Aplicación web con Laravel"
+        resumen="Sistema web que concilia las ventas de cada sucursal contra SAP. Detecta diferencias, da seguimiento al cierre del día y organiza el trabajo del equipo: guardias, usuarios y permisos."
+        nota="Desarrollado para el área de Infraestructura y Operaciones Comerciales de Grupo Sánchez, con el apoyo de los jefes del área."
+        stack={['PHP', 'Laravel', 'Blade', 'SAP HANA', 'SQL Server', 'Bootstrap']}
+        datos={['27,000 líneas, 120 commits', '14 módulos, 24 modelos', 'Roles, permisos y bitácora']}
+      >
+        <Captura prueba src={monitorCuadre} alt="Tablero mensual con una fila por centro y una columna por día" etiqueta="Cuadre CAR: mes completo" pie="Cada color es un estado del cuadre: OK, saldo por depositar, diferencia, falta recálculo…" ancho={1400} />
+        <div class="par">
+          <Captura prueba src={monitorGuardias} alt="Rol de guardias semanal por áreas" etiqueta="Rol de guardias" pie="Rol de guardias: horarios por área, con copiado de semana a semana" ancho={900} />
+          <Captura prueba src={monitorUsuarios} alt="Pantalla de usuarios del sistema con roles" etiqueta="Usuarios y roles" pie="Alta de usuarios con perfiles y permisos por módulo" ancho={900} />
+        </div>
+        <Captura src={monitorLogin} alt="Pantalla de inicio de sesión del Monitor de Ventas" etiqueta="Inicio de sesión" pie="Inicio de sesión del Monitor de Ventas" ancho={1400} />
+      </Proyecto>
+
+      <Proyecto
+        nombre="Reportes Contables"
+        tipo="Aplicación web con Laravel + Livewire"
+        resumen="Tres reportes para Contabilidad: los retiros de efectivo, el efectivo cobrado en cada tienda y la conciliación de facturas entre Merksyst y SAP. Cada uno se consulta en segundos y se exporta a Excel."
+        stack={['PHP', 'Laravel', 'Livewire', 'SQL Server', 'SAP', 'Excel']}
+        datos={['3 módulos: retiros, efectivo y facturas', 'Consulta en vivo, directo a la tienda', 'Roles y permisos por módulo']}
+        invertido={true}
+      >
+        <Captura prueba src={reportesFacturas} alt="Conciliación de facturas con centros que cuadran y diferencias" etiqueta="Conciliación de facturas" pie="Conciliación de facturas: cada centro contra SAP, con sus diferencias marcadas" ancho={1440} />
+        <div class="par">
+          <Captura prueba src={reportesRetiros} alt="Reporte de retiros de efectivo por centro y cajero" etiqueta="Retiros (F9)" pie="Retiros de efectivo de todos los centros, con su cierre" ancho={900} />
+          <Captura prueba src={reportesEfectivo} alt="Reporte de efectivo cobrado por centro con cashback" etiqueta="Efectivo" pie="Efectivo cobrado por tienda, menos cashback" ancho={900} />
+        </div>
+        <Captura prueba src={reportesCentros} alt="Catálogo de centros con filtros y estado" etiqueta="Catálogo de centros" pie="Catálogo de centros: de dónde se leen los datos de cada tienda" ancho={1200} />
+      </Proyecto>
+
+      <Proyecto
+        nombre="HelpCAR"
+        tipo="Escritorio con C# / WinForms"
+        resumen="Aplicación de escritorio para el área: consulta el ticket de cualquier tienda, regenera un cierre que no subió y saca el reporte del día. Se actualiza sola en cada sucursal."
+        stack={['C#', 'WinForms', '.NET 4.7.2', 'SQL Server', 'ClosedXML', 'FTP']}
+        datos={['8,800 líneas, 25 versiones', 'Actualizador propio', 'Conexión por VPN a cada tienda']}
+      >
+        <Captura prueba src={helpcar} alt="Ventana principal de HelpCAR con sus módulos" etiqueta="HelpCAR v2.3" pie="Seis módulos en una sola ventana; abajo a la izquierda, la versión instalada" ancho={1180} />
+      </Proyecto>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════ POR MI CUENTA ══════════════════════ -->
+  <section class="seccion alterna" id="por-mi-cuenta">
+    <div class="wrap">
+      <div class="sec-cab">
+        <h2 class="h-sec">Proyectos personales</h2>
+      </div>
+
+      <Proyecto
+        nombre="Punto de venta"
+        tipo="Escritorio con TypeScript + Electron"
+        resumen="Un punto de venta para tiendas de abarrotes y mayoreo que funciona sin internet. Cobro, corte de caja, inventario, devoluciones y reportes, todo con el teclado."
+        stack={['TypeScript', 'Electron', 'SQLite', 'NestJS', 'PostgreSQL', 'Zod']}
+        datos={['Funciona sin red y sincroniza después, sin duplicar ventas', 'Dinero en centavos, nunca decimales', 'Respaldos automáticos y recuperación de base dañada']}
+        estado="ninguno"
+      >
+        <Captura prueba src={posTicket} alt="Pantalla de venta con un ticket de seis productos" etiqueta="Venta" pie="La venta: se escanea o se escribe la clave y el total se arma solo" ancho={1440} />
+        <div class="par">
+          <Captura prueba src={posReporte} alt="Reporte de ventas del día por forma de pago y departamento" etiqueta="Reporte del día" pie="Reporte del día: por forma de pago y por departamento" ancho={900} />
+          <Captura prueba src={posCatalogo} alt="Catálogo de productos con clave, tipo y precio" etiqueta="Catálogo" pie="Catálogo de productos, por pieza o a granel" ancho={900} />
+        </div>
+      </Proyecto>
+
+      <Proyecto
+        nombre="QuizzApp"
+        tipo="App web instalable con React"
+        resumen="Para estudiar con tarjetas: modos de repaso, examen y emparejar. Califica las respuestas escritas y una IA da una segunda opinión cuando fallas. La usan estudiantes de medicina en temporada de exámenes."
+        stack={['React', 'TypeScript', 'Vite', 'Tailwind', 'Supabase', 'PWA', 'API Gemini']}
+        datos={['Funciona sin internet', 'Se instala en Android y Windows', 'Pruebas automáticas con Playwright']}
+        estado="ninguno"
+        invertido={true}
+        enlace={{ href: 'https://quizzapp-potaxies.vercel.app', texto: 'Abrir la app' }}
+      >
+        <Captura src={quizzTema} alt="Pantalla de un tema con sus modos de estudio y avance" etiqueta="Tema" pie="Cada tema con sus cuatro modos de estudio y el avance" ancho={1366} />
+        <Captura src={quizzIa} alt="Respuesta incorrecta con la segunda opinión de la IA" etiqueta="Segunda opinión con IA" pie="Si la respuesta escrita falla, la IA revisa si fue error de concepto o de redacción" ancho={1366} />
+      </Proyecto>
+
+      <Proyecto
+        nombre="Lectura de bitácoras con IA"
+        tipo="Aplicación web con Python + React"
+        resumen="Se sube la foto de una hoja de presiones escrita a mano; la IA la lee y la deja lista para el Excel. Lo que no cuadra con el historial del pozo se marca para que una persona lo revise antes de exportar."
+        stack={['Python', 'FastAPI', 'React', 'TypeScript', 'Mantine', 'API Gemini']}
+        datos={['Revisión lado a lado: foto y tabla', 'Detecta valores fuera de rango', 'Publicada en Linux con HTTPS']}
+        estado="ninguno"
+      >
+        <Captura prueba src={bitacorasRevision} alt="Hoja escrita a mano junto a la tabla que leyó la IA, con un valor marcado" etiqueta="Revisión de una hoja" pie="La IA leyó «530» donde el pozo suele marcar 40–65 y propone 53" ancho={1440} />
+      </Proyecto>
+
+      <Proyecto
+        nombre="Asistente personal en WhatsApp"
+        tipo="Servidor propio con OpenClaw"
+        resumen="Un asistente que vive en mi servidor y se maneja por WhatsApp. Cada mañana manda el clima, los pendientes y los pagos que vienen; anota gastos, pone recordatorios y resume los videos que le mandas."
+        stack={['OpenClaw', 'Node.js', 'Bash', 'Proxmox LXC', 'ChatGPT', 'API Gemini']}
+        datos={['Cada usuario tiene su propio asistente, aislado de los demás', 'Solo obedece a su dueño; nada sale sin su «sí»', 'Siguiente paso: agenda y calendario']}
+        estado="ninguno"
+        invertido={true}
+      >
+        <div class="chat reveal" role="img" aria-label="Ejemplo de conversación con el asistente">
+          <div class="chat-cab"><span class="chat-avatar">J</span><div><b>Jenny</b><small>en línea</small></div></div>
+          <div class="chat-cuerpo">
+            <p class="msg ella"><b>Buenos días ☀️</b><br />Villahermosa: 31° y lluvia por la tarde.<br />Hoy: pagar la luz ($486).<br />El viernes corta tu tarjeta.</p>
+            <p class="msg yo">Recuérdame el jueves a las 7 ir por el paquete</p>
+            <p class="msg ella">Listo ✅ Jueves 20 a las 7:00 te aviso.</p>
+            <p class="msg yo">Gasté 230 en la farmacia</p>
+            <p class="msg ella">Anotado: $230, Salud. Esta semana llevas $1,140.</p>
+          </div>
+        </div>
+      </Proyecto>
+
+      <Proyecto
+        nombre="Vazoil Services"
+        tipo="Landing page con Astro"
+        resumen="Sitio para una empresa de servicios petroleros, donde llevé gráficos 3D a la web con Three.js."
+        stack={['Astro', 'Tailwind', 'Three.js', 'Vercel']}
+        estado="ninguno"
+        enlace={{ href: 'https://proyecto-vazoil-service.vercel.app', texto: 'Ver sitio' }}
+      >
+        <Captura src={vazoilHero} alt="Portada del sitio de Vazoil Services" etiqueta="Vazoil Services" pie="Vazoil Services: portada con una pieza en 3D" ancho={1400} />
+      </Proyecto>
+
+      <Proyecto
+        nombre="Essence Beauty"
+        tipo="Landing page con Astro"
+        resumen="Landing para una estética: galería, video del proceso, servicios, reseñas y citas por WhatsApp. Incluye un panel para gestionar la página."
+        stack={['Astro', 'Tailwind', 'Vercel']}
+        estado="ninguno"
+        invertido={true}
+        enlace={{ href: 'https://enrique-web.vercel.app', texto: 'Ver sitio' }}
+      >
+        <Captura src={kikeHero} alt="Portada de Essence Beauty" etiqueta="Essence Beauty" pie="Essence Beauty: portada de la landing" ancho={1400} />
+        <div class="par">
+          <Captura prueba src={essencePanel} alt="Panel de administración con las secciones de la página" etiqueta="Panel de administración" pie="Panel para gestionar la página, sección por sección" ancho={900} />
+          <Captura prueba src={essencePanelServicios} alt="Edición de precios y servicios en el panel" etiqueta="Precios y servicios" pie="Edición de precios y servicios desde el panel" ancho={900} />
+        </div>
+      </Proyecto>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ SERVIDORES ══════════════════════ -->
+  <section class="seccion" id="servidores">
+    <div class="wrap">
+      <div class="sec-cab">
+        <h2 class="h-sec">Servidores</h2>
+        <p>Monté y administro mi propio servidor Linux; ahí corren varias de mis aplicaciones.</p>
+      </div>
+
+      <div class="infra">
+        <div class="infra-card reveal">
+          <h3>Servidor propio con Proxmox</h3>
+          <p>
+            Cada aplicación vive aislada en su propio contenedor. Arranca sola, se respalda sola
+            todos los días y guarda una copia completa cada semana.
+          </p>
+          <ul class="rasgos">
+            <li>Respaldos automáticos</li>
+            <li>Acceso seguro con HTTPS</li>
+            <li>Arranque automático</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Proxmox</span><span class="chip">Linux</span><span class="chip">Bash</span>
+          </div>
+        </div>
+
+        <div class="infra-card reveal d1">
+          <h3>Panel de control web</h3>
+          <p>
+            Una app en Python para encender, apagar, respaldar y actualizar los servicios del
+            servidor desde el celular, con el avance en tiempo real.
+          </p>
+          <ul class="rasgos">
+            <li>Se usa desde el celular</li>
+            <li>Avance en tiempo real</li>
+            <li>Protegido con HTTPS</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">HTTPS</span><span class="chip">SSH</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="automatiza reveal">
+        <h3>Automatizaciones que dejé corriendo</h3>
+        <ul>
+          <li><b>Vigilante del no-break.</b> Avisa por Telegram cuando se va la luz y cuánto respaldo queda.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ HERRAMIENTAS Y TRAYECTORIA ══════════════════════ -->
+  <section class="seccion alterna" id="perfil">
+    <div class="wrap perfil-grid">
+      <div class="reveal">
+        <h2 class="h-sec">Herramientas</h2>
+        <dl class="stack">
+          <div><dt>Lenguajes</dt><dd>PHP, C#, TypeScript, Python, PowerShell, SQL</dd></div>
+          <div><dt>Web</dt><dd>Laravel, Livewire, React, FastAPI, NestJS, Astro, Tailwind</dd></div>
+          <div><dt>Escritorio</dt><dd>WinForms, .NET, Electron</dd></div>
+          <div><dt>Datos</dt><dd>SQL Server, PostgreSQL, SAP HANA, SQLite, Supabase</dd></div>
+          <div><dt>Servidores</dt><dd>Proxmox, Linux, systemd, Caddy, SSH, Windows Server</dd></div>
+          <div><dt>IA</dt><dd>API de Gemini, lectura de imágenes, calificación de respuestas</dd></div>
+          <div><dt>Además</dt><dd>Git, GitHub Actions, Vercel, Playwright</dd></div>
+        </dl>
+      </div>
+
+      <div class="reveal d1">
+        <h2 class="h-sec">Trayectoria</h2>
+        <ol class="linea">
+          <li>
+            <span class="tiny">Dic. 2024 a hoy</span>
+            <b>Auxiliar CARPOS</b>
+            <p>Cuadro las ventas del punto de venta contra SAP y resuelvo las diferencias. Las herramientas de arriba salieron de este trabajo.</p>
+          </li>
+          <li>
+            <span class="tiny">Dic. 2023 a may. 2024</span>
+            <b>Implementador de TI</b>
+            <p>Servidores de dominio en Windows Server, clonación de bases, paquetes de actualización y migraciones en SQL Server.</p>
+          </li>
+          <li>
+            <span class="tiny">2023 a 2025</span>
+            <b>Ingeniería en Desarrollo y Gestión de Software</b>
+            <p>Universidad Tecnológica de Tabasco. Antes, TSU en la misma carrera (2021 a 2023).</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ CONTACTO ══════════════════════ -->
+  <footer>
+    <div class="wrap pie">
+      <div>
+        <h2 class="h-sec">¿Platicamos?</h2>
+      </div>
+      <div class="enlaces">
+        <a class="enlace" href="mailto:leonidaismadrigalpardo@gmail.com">leonidaismadrigalpardo@gmail.com</a>
+        <a class="enlace" href="mailto:leomadrigalpardo@outlook.com">leomadrigalpardo@outlook.com</a>
+        <a class="enlace" href="https://github.com/LeoStudioCode" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="nota">
+        Todas las capturas de los sistemas usan datos de prueba; ninguna muestra información real.
+      </p>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  /* ---------- Portada ---------- */
+  .hero {
+    padding-top: clamp(40px, 7vw, 88px);
+    padding-bottom: clamp(24px, 4vw, 48px);
+    background:
+      radial-gradient(1100px 520px at 78% -8%, rgba(110, 168, 255, 0.12), transparent 62%),
+      radial-gradient(760px 420px at 8% 4%, rgba(95, 211, 162, 0.06), transparent 60%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+
+  .hero-texto { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+  .hero-texto .lead { max-width: 40ch; }
+
+  .enlaces { display: flex; flex-wrap: wrap; gap: 9px; }
+
+  .hero-pila {
+    position: relative;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-width: 0;
+  }
+  .pila-item { min-width: 0; }
+  .pila-item.p1 { grid-column: 1 / -1; }
+
+  /* ---------- Cifras ---------- */
+  .cifras {
+    list-style: none;
+    margin: clamp(40px, 6vw, 72px) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .cifras li {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .cifras span { overflow-wrap: anywhere; }
+  .cifras li + li { border-left: 1px solid var(--rule-soft); }
+  .cifras b {
+    font-variation-settings: "wdth" 112, "wght" 750;
+    font-size: clamp(24px, 3.2vw, 34px);
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+  }
+  .cifras span {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Fondos alternos ---------- */
+  .alterna { background: var(--ground-2); }
+
+  /* ---------- Pares de capturas ---------- */
+  .par {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    min-width: 0;
+  }
+
+  /* ---------- Rejilla web ---------- */
+  .rejilla-web {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 34px);
+  }
+  .web-item { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .web-pie .chips { min-width: 0; }
+  .web-item.ancho { grid-column: 1 / -1; }
+
+  .web-pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .web-pie h3 {
+    font-variation-settings: "wdth" 108, "wght" 700;
+    font-size: 19px;
+    margin: 0 0 4px;
+  }
+  .web-pie p { margin: 0; color: var(--ink-soft); font-size: 14.5px; max-width: 44ch; }
+
+  /* ---------- Infraestructura ---------- */
+  .infra {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(18px, 2.6vw, 28px);
+    min-width: 0;
+  }
+  .infra-card {
+    min-width: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .infra-card h3 {
+    font-variation-settings: "wdth" 108, "wght" 700;
+    font-size: 21px;
+    margin: 0;
+  }
+  .infra-card p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+  .terminal {
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+    max-width: 100%;
+    background: #070B0F;
+    border: 1px solid var(--rule-soft);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    overflow-x: auto;
+  }
+  .t-linea { white-space: pre; color: var(--ink-soft); }
+  .t-linea i { color: var(--accent); font-style: normal; padding-right: 8px; }
+  .t-linea.ok { color: var(--live); }
+  .t-linea.dim { color: var(--ink-faint); }
+
+  .rasgos {
+    list-style: none;
+    margin: 4px 0 2px;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .rasgos li {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .rasgos li::before {
+    content: "";
+    width: 10px; height: 2px;
+    background: var(--accent);
+    flex: none;
+    transform: translateY(-4px);
+  }
+
+  .automatiza { margin-top: clamp(28px, 4vw, 44px); }
+  .automatiza h3 { margin: 0 0 16px; font-size: 19px; }
+  .automatiza ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 34px;
+  }
+  .automatiza li {
+    padding-top: 14px;
+    border-top: 1px solid var(--rule-soft);
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .automatiza li b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Perfil ---------- */
+  .perfil-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(32px, 5vw, 68px);
+  }
+  .perfil-grid h2 { margin-bottom: 24px; }
+
+  .stack { margin: 0; display: grid; gap: 0; }
+  .stack > div {
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: 18px;
+    padding: 13px 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .stack dt {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    padding-top: 3px;
+  }
+  .stack dd { margin: 0; font-size: 15px; color: var(--ink); }
+
+  .linea { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+  .linea li {
+    display: grid;
+    gap: 4px;
+    padding-left: 20px;
+    border-left: 2px solid var(--rule);
+    position: relative;
+  }
+  .linea li::before {
+    content: "";
+    position: absolute;
+    left: -5px; top: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .linea b {
+    font-variation-settings: "wdth" 106, "wght" 700;
+    font-size: 17px;
+  }
+  .linea p { margin: 0; color: var(--ink-soft); font-size: 14.5px; max-width: 46ch; }
+
+  /* ---------- Busco equipo ---------- */
+  .busco {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--live);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .busco::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--live);
+    box-shadow: 0 0 0 4px var(--live-dim);
+  }
+
+  /* ---------- Chat de ejemplo ---------- */
+  .chat {
+    max-width: 520px;
+    width: 100%;
+    justify-self: center;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #0B141A;
+  }
+  .chat-cab {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #1F2C33;
+  }
+  .chat-cab b { display: block; color: #E9EDEF; font-size: 15px; }
+  .chat-cab small { color: #8696A0; font-size: 12px; }
+  .chat-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: #0B141A;
+    font-weight: 700;
+  }
+  .chat-cuerpo { display: grid; gap: 8px; padding: 18px 14px 20px; }
+  .msg {
+    margin: 0;
+    max-width: 82%;
+    padding: 8px 11px;
+    border-radius: 9px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: #E9EDEF;
+  }
+  .msg.ella { background: #202C33; justify-self: start; border-top-left-radius: 2px; }
+  .msg.yo { background: #005C4B; justify-self: end; border-top-right-radius: 2px; }
+
+  /* ---------- Pie ---------- */
+  .pie { display: grid; gap: 24px; }
+  .pie .enlaces { gap: 9px; }
+  .nota {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    margin: 4px 0 0;
+    max-width: 66ch;
+    line-height: 1.7;
+  }
+
+  /* ---------- Responsivo ---------- */
+  @media (max-width: 1000px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .infra { grid-template-columns: 1fr; }
+    .perfil-grid { grid-template-columns: 1fr; }
+    .automatiza ul { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 760px) {
+    .hero-pila { grid-template-columns: 1fr; }
+    .cifras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cifras li { padding: 14px 14px; }
+    .cifras li:nth-child(3) { border-left: none; }
+    .cifras li:nth-child(n + 3) { border-top: 1px solid var(--rule-soft); }
+    .rejilla-web { grid-template-columns: 1fr; }
+    .par { grid-template-columns: 1fr; }
+    .stack > div { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>

@@ -1,0 +1,115 @@
+---
+import { Image, getImage } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  pie?: string;
+  etiqueta?: string;
+  ancho?: number;
+  clase?: string;
+  prioridad?: boolean;
+  prueba?: boolean;
+}
+
+const { src, alt, pie, etiqueta, ancho = 1200, clase = '', prioridad = false, prueba = false } = Astro.props;
+const pieVisor = (pie ?? alt) + (prueba ? ' (datos de prueba)' : '');
+// Versión a tamaño completo para el visor: solo se descarga al abrir la foto.
+const grande = await getImage({ src, width: src.width, format: 'webp', quality: 92 });
+---
+
+<figure class={`captura ${clase}`} data-visor data-grande={grande.src} data-pie={pieVisor} tabindex="0" role="button" aria-label={`Ver más grande: ${alt}`}>
+  <div class="barra">
+    <span class="punto"></span><span class="punto"></span><span class="punto"></span>
+    {etiqueta && <span class="etiqueta">{etiqueta}</span>}
+    {prueba && <span class="prueba">Datos de prueba</span>}
+    <span class="lupa" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path>
+      </svg>
+    </span>
+  </div>
+  <Image
+    src={src}
+    alt={alt}
+    widths={[520, 900, ancho]}
+    sizes={`(max-width: 760px) 92vw, ${ancho}px`}
+    format="webp"
+    quality={82}
+    loading={prioridad ? 'eager' : 'lazy'}
+    decoding={prioridad ? 'sync' : 'async'}
+  />
+</figure>
+
+<style>
+  .captura {
+    margin: 0;
+    min-width: 0;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+    cursor: zoom-in;
+    transition: border-color .2s;
+    position: relative;
+  }
+  .captura:hover,
+  .captura:focus-visible {
+    border-color: var(--accent);
+  }
+
+  .barra {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    padding: 9px 12px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .punto {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--rule);
+    flex: none;
+  }
+  .etiqueta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-left: 8px;
+    min-width: 0;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .prueba {
+    margin-left: auto;
+    flex: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #F5C26B;
+    border: 1px solid rgba(245, 194, 107, .45);
+    background: rgba(245, 194, 107, .1);
+    border-radius: 99px;
+    padding: 2px 8px;
+  }
+  .prueba + .lupa { margin-left: 8px; }
+  .lupa {
+    margin-left: auto;
+    color: var(--ink-faint);
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    transition: opacity .2s, color .2s;
+  }
+  .lupa svg { width: 15px; height: 15px; }
+  .captura:hover .lupa,
+  .captura:focus-visible .lupa { opacity: 1; color: var(--accent); }
+
+  .captura :global(img) {
+    width: 100%;
+    height: auto;
+  }
+</style>
