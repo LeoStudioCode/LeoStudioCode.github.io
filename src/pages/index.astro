@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import fotoGraduacion from '../assets/img/leonardo-graduacion.jpg';
 import Captura from '../components/Captura.astro';
 import Proyecto from '../components/Proyecto.astro';
 
@@ -289,6 +291,10 @@ const descripcion =
 
       <div class="reveal d1">
         <h2 class="h-sec">Trayectoria</h2>
+        <figure class="foto-grad">
+          <Image src={fotoGraduacion} alt="Leonardo Madrigal en su graduación de Ingeniería en Desarrollo y Gestión de Software" widths={[320, 640]} sizes="320px" format="webp" quality={85} />
+          <figcaption>Graduación de Ingeniería, Universidad Tecnológica de Tabasco.</figcaption>
+        </figure>
         <ol class="linea">
           <li>
             <span class="tiny">Dic. 2024 a hoy</span>
@@ -514,6 +520,16 @@ const descripcion =
     gap: clamp(32px, 5vw, 68px);
   }
   .perfil-grid h2 { margin-bottom: 24px; }
+
+  .foto-grad { margin: 0 0 30px; max-width: 320px; }
+  .foto-grad :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--rule);
+  }
+  .foto-grad figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-faint); }
 
   .stack { margin: 0; display: grid; gap: 0; }
   .stack > div {
